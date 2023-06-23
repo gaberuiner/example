@@ -1,0 +1,32 @@
+version: "3.1"
+
+networks:
+  net:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:15.1
+    environment:
+      POSTGRES_DB: checkout
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    
+    ports:
+      - 5433:5432
+    
+
+  postgres2:
+    image: postgres:15.1
+    environment:
+      POSTGRES_DB: loms
+      POSTGRES_USER: postgres_u
+      POSTGRES_PASSWORD: 123
+      PGDATA: "/var/lib/postgresql/data/pgdata2"
+    ports:
+      - 5434:5432
+    
+
+
+

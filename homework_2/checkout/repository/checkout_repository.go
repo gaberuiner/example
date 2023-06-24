@@ -7,7 +7,7 @@ import (
 	productservice "route256/checkout/internal/other_server_connection/product_service"
 	"route256/checkout/internal/protoc/checkout"
 
-	"github.com/Masterminds/squirrel"
+	
 	"github.com/jackc/pgx/v4/pgxpool"
 )
 

@@ -26,15 +26,8 @@ func (r *Repository) AddToCart(ctx context.Context, req *checkout.AddToCartReque
 	}
 	defer tx.Rollback(ctx)
 
-	query, args, err := squirrel.Insert("CartItem").
-		Columns("user_id", "sku", "count").
-		Values(req.User, req.Sku, req.Count).
-		ToSql()
-	if err != nil {
-		return fmt.Errorf("failed to build insert query: %v", err)
-	}
-
-	_, err = tx.Exec(ctx, query, args...)
+	query := "INSERT INTO CartItem (user_id, sku, count) VALUES ($1, $2, $3)"
+	_, err = tx.Exec(ctx, query, int64(req.User), int32(req.Sku), int32(req.Count))
 	if err != nil {
 		return fmt.Errorf("failed to insert into CartItem: %v", err)
 	}
@@ -44,6 +37,7 @@ func (r *Repository) AddToCart(ctx context.Context, req *checkout.AddToCartReque
 		return fmt.Errorf("failed to commit transaction: %v", err)
 	}
 	return nil
+
 }
 
 func (r *Repository) DeleteFromCart(ctx context.Context, req *checkout.DeleteFromCartRequest) error {

@@ -1,0 +1,2 @@
+goose -dir ./checkout/migrations postgres "postgres://postgres:123@localhost:5433/checkout?sslmode=disable" up 
+goose -dir ./loms/migrations postgres "postgres://postgres_u:123@localhost:5434/loms?sslmode=disable" up
